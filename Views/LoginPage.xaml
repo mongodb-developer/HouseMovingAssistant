@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HouseMovingAssistant.Views.LoginPage"
+             Title="LoginPage">
+
+    <Grid x:Name="MainGrid">
+        <Image Aspect="Fill" Source="moving_header.jpg" />
+       
+            <VerticalStackLayout VerticalOptions="FillAndExpand" Padding="6" Spacing="10">
+                <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="bloodpressure" HorizontalOptions="Center" />
+                <!-- Place new controls here -->
+                <VerticalStackLayout x:Name="FormLayout" Spacing="5" VerticalOptions="CenterAndExpand">                    
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Username/Email" TextColor="{StaticResource Primary}"/>
+                        <Entry Text="{Binding EmailEntry}" Keyboard="Plain" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Password" TextColor="{StaticResource Primary}"/>
+                        <Entry Text="{Binding PasswordEntry}" IsPassword="True"/>
+                    </VerticalStackLayout>                    
+                </VerticalStackLayout>
+                    </VerticalStackLayout>
+                <Button x:Name="LoginButton" Command="{Binding LoginCommand}" VerticalOptions="EndAndExpand" Text="Login"
+                        BackgroundColor="{StaticResource Secondary}" TextColor="{StaticResource Primary}"/>
+                <Button x:Name="CreateAccountButton" Command="{Binding CreateAccountCommand}" VerticalOptions="EndAndExpand" Text="Create Account" BackgroundColor="{StaticResource PrimaryColorOrange}" TextColor="{StaticResource SecondaryColorBlue}"/>
+            </VerticalStackLayout>
+      
+
+    </Grid>
+   
+</ContentPage>

@@ -70,4 +70,9 @@
 	<ItemGroup>
 	  <None Remove="Realm" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

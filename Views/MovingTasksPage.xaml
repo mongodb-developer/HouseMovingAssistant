@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.NavBarIsVisible="False"
+                xmlns:vm="clr-namespace:HouseMovingAssistant.ViewModels"
+            x:DataType="vm:MovingTasksPageViewModel"
              x:Class="HouseMovingAssistant.Views.MovingTasksPage">
 			 
    
@@ -30,7 +32,7 @@
             
 
             <Label 
-                    Text="Welcome in!"
+                    Text="{Binding WelcomeMessage}"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="32"
                     HorizontalOptions="CenterAndExpand" />
@@ -40,7 +42,7 @@
                 <Entry Placeholder="Enter moving task.." Text="{Binding MovingTaskEntryText}"/>
             </HorizontalStackLayout>
             
-            <CollectionView ItemsSource="{Binding MovingList}">
+            <!--<CollectionView ItemsSource="{Binding}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <HorizontalStackLayout Padding="10">
@@ -49,7 +51,7 @@
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
         </VerticalStackLayout>
         </Grid>
         

@@ -57,8 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.0-rc2" />
+	  <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 	  <PackageReference Include="Realm" Version="10.14.0" />
+	  <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +70,8 @@
 
 	<ItemGroup>
 	  <None Remove="Realm" />
+	  <None Remove="CommunityToolkit.Mvvm" />
+	  <None Remove="Refractored.MvvmHelpers" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Views\LoginPage.xaml">

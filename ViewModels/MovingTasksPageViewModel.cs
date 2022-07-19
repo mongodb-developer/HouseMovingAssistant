@@ -13,13 +13,10 @@ namespace HouseMovingAssistant.ViewModels
     {
         public MovingTasksPageViewModel()
         {
-
+            
         }
 
-        [ObservableProperty]
-        string MovingTaskEntryText;
-
-        [ObservableProperty]
+       
       
     }
 }

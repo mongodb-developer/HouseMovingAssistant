@@ -1,11 +1,19 @@
-﻿namespace HouseMovingAssistant;
+﻿using HouseMovingAssistant.Helpers;
+
+namespace HouseMovingAssistant;
 
 public partial class App : Application
 {
+	public static Realms.Sync.App RealmApp;
 	public App()
 	{
 		InitializeComponent();
-
-		MainPage = new AppShell();
+        RealmApp = Realms.Sync.App.Create(AppConfig.RealmAppId);
+        MainPage = new AppShell();
 	}
+
+	protected override void OnStart()
+    {
+		
+    }
 }

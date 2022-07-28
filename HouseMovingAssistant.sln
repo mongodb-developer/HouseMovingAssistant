@@ -1,22 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32714.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseMovingAssistant", "HouseMovingAssistant.csproj", "{0AA07242-C677-43AB-829B-09835012BDDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseMovingAssistant", "HouseMovingAssistant.csproj", "{0AA07242-C677-43AB-829B-09835012BDDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0AA07242-C677-43AB-829B-09835012BDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0AA07242-C677-43AB-829B-09835012BDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA07242-C677-43AB-829B-09835012BDDF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{0AA07242-C677-43AB-829B-09835012BDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA07242-C677-43AB-829B-09835012BDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D294F71-05EF-400B-A9B3-5AA9DAB1DA7E}
 	EndGlobalSection
 EndGlobal

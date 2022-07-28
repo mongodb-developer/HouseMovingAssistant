@@ -8,15 +8,22 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MvvmHelpers;
+using System.Windows.Input;
+using MvvmHelpers.Commands;
+using HouseMovingAssistant.Models;
 
 namespace HouseMovingAssistant.ViewModels
 {
    
-    public partial class MovingTasksPageViewModel : BaseViewModel
+    public class MovingTasksPageViewModel : BaseViewModel
     {
+        public ICommand AddTaskCommand { get; set; }
         public MovingTasksPageViewModel()
         {
             WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";
+            AddTaskCommand = new AsyncCommand(() => AddMovingTask());
+            movingTasks = new ObservableCollection<MovingTask>();
+             
         }
 
         private string welcomeMessage = "Welcome in!";
@@ -33,5 +40,38 @@ namespace HouseMovingAssistant.ViewModels
             set => SetProperty(ref movingTaskEntryText, value);
         }
 
+        private ObservableCollection<MovingTask> movingTasks;
+        public ObservableCollection<MovingTask> MovingTasks
+        {
+            get => movingTasks;
+            set => SetProperty(ref movingTasks, value);
+            
+        }
+
+        private async Task AddMovingTask()
+        {
+            if(MovingTaskEntryText.Length > 0)
+            {
+                try
+                {
+                    MovingTasks.Add(
+                        new MovingTask
+                        {
+                            Name = MovingTaskEntryText,
+                            Partition = App.RealmApp.CurrentUser.Id,
+                            Status = "Open"                            
+                        }
+                    );
+
+                    MovingTaskEntryText = "";
+
+                } catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+
+                }
+            }
+        }
+        
     }
 }

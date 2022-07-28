@@ -40,18 +40,18 @@
 
             <HorizontalStackLayout>
                 <Entry Placeholder="Enter moving task.." Text="{Binding MovingTaskEntryText}"/>
+                <Button Text="Add Task" Command="{Binding AddTaskCommand}" />
             </HorizontalStackLayout>
             
-            <!--<CollectionView ItemsSource="{Binding}">
+            <CollectionView ItemsSource="{Binding MovingTasks}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <HorizontalStackLayout Padding="10">
-                            <Label Text="{Binding Name}" />
-                            <CheckBox IsChecked="{Binding IsCompleted}" />
+                            <Label Text="{Binding Name}" />                            
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            </CollectionView>
         </VerticalStackLayout>
         </Grid>
         

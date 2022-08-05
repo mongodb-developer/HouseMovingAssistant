@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.NavBarIsVisible="False"
-                xmlns:vm="clr-namespace:HouseMovingAssistant.ViewModels"
+             xmlns:vm="clr-namespace:HouseMovingAssistant.ViewModels"
+             xmlns:models="clr-namespace:HouseMovingAssistant.Models"
             x:DataType="vm:MovingTasksPageViewModel"
+            
              x:Class="HouseMovingAssistant.Views.MovingTasksPage">
 			 
    
@@ -38,20 +40,32 @@
                     HorizontalOptions="CenterAndExpand" />
 
 
-            <HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
                 <Entry Placeholder="Enter moving task.." Text="{Binding MovingTaskEntryText}"/>
                 <Button Text="Add Task" Command="{Binding AddTaskCommand}" />
             </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding MovingTasks}"                                
+                                Grid.ColumnSpan="2">                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:MovingTask">
+                            <Grid ColumnDefinitions="*, *"
+                                  ColumnSpacing="20"                                
+                                  RowDefinitions="*,*"
+                                  RowSpacing="10">                               
+                                <Label Text="{Binding Name}" Grid.Column="0"/>
+                            <Picker SelectedIndexChanged="Picker_SelectedIndexChanged">
+                                <Picker.Items>
+                                    <x:String>Open</x:String>
+                                    <x:String>InProgress</x:String>
+                                    <x:String>Completed</x:String>                                  
+                                </Picker.Items>
+                            </Picker>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             
-            <CollectionView ItemsSource="{Binding MovingTasks}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <HorizontalStackLayout Padding="10">
-                            <Label Text="{Binding Name}" />                            
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
         </VerticalStackLayout>
         </Grid>
         

@@ -23,14 +23,7 @@ namespace HouseMovingAssistant.Models
 
         [MapTo("status")]
         [Required]
-        public string Status { get; set; }
-
-        public enum MovingTaskStatus
-        {
-            Open,
-            InProgress,
-            Complete
-        }
+        public string Status { get; set; }        
     }
 }
 

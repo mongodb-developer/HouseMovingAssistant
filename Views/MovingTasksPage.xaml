@@ -7,31 +7,31 @@
             x:DataType="vm:MovingTasksPageViewModel"
             
              x:Class="HouseMovingAssistant.Views.MovingTasksPage">
-			 
-   
-        <Grid RowDefinitions="200, Auto">
 
-            <Grid Grid.Row="0">
+
+    <Grid RowDefinitions="200, Auto">
+
+        <Grid Grid.Row="0">
             <Image Source="moving_header.png" Aspect="AspectFill"/>
             <StackLayout>
                 <Image
-                    Source="moving_truck.png"
+                    Source="furniture.png"
                     SemanticProperties.Description="House on the back of a moving truck!"
-                    HeightRequest="100"
+                    HeightRequest="150"
                     VerticalOptions="CenterAndExpand"
                    />
             </StackLayout>
-                  
-          
+
+
         </Grid>
-            
-            <VerticalStackLayout 
+
+        <VerticalStackLayout 
                 Grid.Row="1"
                 Spacing="25" 
                 Padding="30,0" 
                 VerticalOptions="Center">
 
-            
+
 
             <Label 
                     Text="{Binding WelcomeMessage}"
@@ -42,33 +42,52 @@
 
             <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
                 <Entry Placeholder="Enter moving task.." Text="{Binding MovingTaskEntryText}"/>
-                <Button Text="Add Task" Command="{Binding AddTaskCommand}" />
+                <Button Text="Add Task" Command="{Binding AddMovingTaskCommand}" />
             </HorizontalStackLayout>
 
-                <CollectionView ItemsSource="{Binding MovingTasks}"                                
-                                Grid.ColumnSpan="2">                    
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:MovingTask">
-                            <Grid ColumnDefinitions="*, *"
-                                  ColumnSpacing="20"                                
-                                  RowDefinitions="*,*"
-                                  RowSpacing="10">                               
-                                <Label Text="{Binding Name}" Grid.Column="0"/>
-                            <Picker SelectedIndexChanged="Picker_SelectedIndexChanged">
-                                <Picker.Items>
-                                    <x:String>Open</x:String>
-                                    <x:String>InProgress</x:String>
-                                    <x:String>Completed</x:String>                                  
-                                </Picker.Items>
-                            </Picker>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            
+            <CollectionView ItemsSource="{Binding MovingTasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:MovingTask">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="DarkRed"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MovingTasksPageViewModel}}, Path=DeleteTaskCommand}"
+                                               CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            
+                           
+                                <Grid
+                                    Margin="0,0,0,10"
+                                  ColumnSpacing="10"
+                                  ColumnDefinitions="*, auto, *"
+                                  RowSpacing="5"
+                                  HorizontalOptions="Center">                               
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Column="0"/>
+                                <Label Text="{Binding Status}" Grid.Column="1">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MovingTasksPageViewModel}}, Path=EditTaskCommand}"
+                                               CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                </Grid>
+                            
+                            
+                        </SwipeView>
+
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Stats" Command="{Binding ViewStatsCommand}" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" />
+
         </VerticalStackLayout>
-        </Grid>
-        
-    
- 
+    </Grid>
+
+
+
 </ContentPage>

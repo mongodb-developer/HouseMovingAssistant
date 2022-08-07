@@ -10,6 +10,8 @@
                   ContentTemplate="{DataTemplate local:LoginPage}">
     </ShellContent>
 
+    
+
     <TabBar Route="Main">
         <ShellContent Title="Moving Tasks" Icon="furniture.png" Route="MovingTasks" ContentTemplate="{DataTemplate local:MovingTasksPage}" />
 

@@ -1,65 +1,42 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using HouseMovingAssistant.Models;
+using HouseMovingAssistant.Views;
 using Realms;
 using Realms.Sync;
-using MvvmHelpers;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MvvmHelpers.Commands;
-using HouseMovingAssistant.Models;
-
+using static System.Net.Mime.MediaTypeNames;
 using User = HouseMovingAssistant.Models.User;
 
 namespace HouseMovingAssistant.ViewModels
 {
-   
-    public class MovingTasksPageViewModel : BaseViewModel
+
+    public partial class MovingTasksPageViewModel : ObservableObject
     {
 
         private User user;
         private Realm realm;
         private PartitionSyncConfiguration config;
 
-        public ICommand AddTaskCommand { get; set; }  
-        
+       
 
         public MovingTasksPageViewModel()
         {
             WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";
-
-            AddTaskCommand = new AsyncCommand(() => AddMovingTask());
-           
-
             movingTasks = new ObservableCollection<MovingTask>();
         }
 
-        private string welcomeMessage = "Welcome in!";
-        public string WelcomeMessage
-        {
-            get => welcomeMessage;
-            set => SetProperty(ref welcomeMessage, value);
-        }
 
-        private string movingTaskEntryText = "";
-        public string MovingTaskEntryText
-        {
-            get => movingTaskEntryText;
-            set => SetProperty(ref movingTaskEntryText, value);
-        }
+        [ObservableProperty]
+        string welcomeMessage;
 
-        private ObservableCollection<MovingTask> movingTasks;
-        public ObservableCollection<MovingTask> MovingTasks
-        {
-            get => movingTasks;
-            set => SetProperty(ref movingTasks, value);
-            
-        }
+        [ObservableProperty]
+        string movingTaskEntryText;
+
+        [ObservableProperty]
+        ObservableCollection<MovingTask> movingTasks;
+       
 
         public async Task InitialiseRealm()
         {
@@ -95,15 +72,40 @@ namespace HouseMovingAssistant.ViewModels
             
         }
 
-        public async Task ChangeTaskStatus(string status)
+        [RelayCommand]
+        async Task EditTask(MovingTask task)
         {
-            
+
+            await Shell.Current.GoToAsync($"{nameof(EditTaskPage)}", new Dictionary<string, object>
+            {
+                ["MovingTask"] = task
+            }) ;
         }
 
-        private async Task AddMovingTask()
+        [RelayCommand]
+        async Task DeleteTask(MovingTask task)
         {
-            if(MovingTaskEntryText.Length > 0)
+            try
             {
+                realm.Write(() =>
+                {
+                    realm.Remove(task);
+                });
+
+                MovingTasks.Remove(task);
+            } catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+            }
+        }
+
+        [RelayCommand]
+       async Task AddMovingTask()
+        {
+
+            if (string.IsNullOrWhiteSpace(MovingTaskEntryText))
+                return;
+
                 try
                 {
                     var task =
@@ -111,8 +113,11 @@ namespace HouseMovingAssistant.ViewModels
                         {
                             Name = MovingTaskEntryText,
                             Partition = App.RealmApp.CurrentUser.Id,
-                            Status = "Open"
+                            Status = "Open",
+                            Owner = App.RealmApp.CurrentUser.Profile.Email
                         };
+
+                MovingTasks.Add(task);
 
                     realm.Write(() =>
                     {
@@ -126,7 +131,13 @@ namespace HouseMovingAssistant.ViewModels
                     await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
 
                 }
-            }
-        }       
+        }
+
+
+        [RelayCommand]
+        async Task ViewStats()
+        {
+            await Shell.Current.GoToAsync("TaskStatsPage");
+        }
     }
 }

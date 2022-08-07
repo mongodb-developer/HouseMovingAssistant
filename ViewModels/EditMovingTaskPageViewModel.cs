@@ -1,34 +1,86 @@
-﻿using HouseMovingAssistant.Models;
-using MvvmHelpers;
-using Realms.Sync;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using HouseMovingAssistant.Models;
 using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using User = HouseMovingAssistant.Models.User;
+using Realms.Sync;
 
 namespace HouseMovingAssistant.ViewModels
 {
-    
-    public class EditMovingTaskPageViewModel : BaseViewModel
+    [QueryProperty(nameof(MovingTask), nameof(MovingTask))]
+    public partial class EditMovingTaskPageViewModel : ObservableObject
     {
+        private string newName;
+        private string newStatus;
         public EditMovingTaskPageViewModel()
         {
-
         }
 
-        private User user;
         private Realm realm;
         private PartitionSyncConfiguration config;
 
-        private MovingTask taskToEdit;
-        public MovingTask MovingTask
+        public string NewStatus { get; set; }
+
+        public string NewName { get; set; }
+
+        [ObservableProperty]
+        MovingTask movingTask;
+
+        [ObservableProperty]
+        int index;
+
+        [RelayCommand]
+        async Task SaveMovingTask()
         {
-            get => taskToEdit;
-            set => SetProperty(ref taskToEdit, value);
+            config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
+            realm = await Realm.GetInstanceAsync(config);
+
+            
+
+            try
+            {
+                realm.Write(() =>
+                {
+                    var task = realm.Find<MovingTask>(MovingTask.Id);
+
+                    task.Name = newName;
+                    task.Status = newStatus;
+
+                });
+
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+            }
+
         }
+
+        [RelayCommand]
+         void PickerSelectedItemChanged(int selectedItemIndex)
+        {
+            newName = MovingTask.Name;
+            newStatus = MovingTask.Status;
+
+            switch(selectedItemIndex)
+            {
+                case 0:
+                    newStatus = MovingTask.TaskStatus.Open.ToString();
+                    break;
+                case 1:
+                    newStatus = MovingTask.TaskStatus.InProgress.ToString();
+                    break;
+                case 2:
+                    newStatus = MovingTask.TaskStatus.Complete.ToString();
+                    break;
+            }
+        }
+
+        [RelayCommand]
+        async Task Cancel()
+        {
+            await Shell.Current.GoToAsync("..");
+        }
+
     }
 }

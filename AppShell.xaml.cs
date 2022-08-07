@@ -1,4 +1,5 @@
 ﻿using HouseMovingAssistant.ViewModels;
+using HouseMovingAssistant.Views;
 
 namespace HouseMovingAssistant;
 
@@ -9,6 +10,8 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 		viewModel = new LoginPageViewModel();
+
+		Routing.RegisterRoute("edittaskpage", typeof(EditTaskPage));
 	}
 
     protected override void OnNavigated(ShellNavigatedEventArgs args)

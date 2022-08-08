@@ -20,6 +20,7 @@ public static class MauiProgram
 
 
         builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
         builder.Services.AddSingleton<MovingTasksPage>();
 		builder.Services.AddSingleton<MovingTasksPageViewModel>();
 

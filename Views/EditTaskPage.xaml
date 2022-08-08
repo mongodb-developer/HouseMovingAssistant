@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HouseMovingAssistant.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="vm:EditMovingTaskPageViewModel"
              x:Class="HouseMovingAssistant.Views.EditTaskPage"
              Title="EditTaskPage">
     <VerticalStackLayout>
         <HorizontalStackLayout>
-            <Label Text="Name" />
-            
+            <Label Text="Name"/>
+            <Entry Text="{Binding MovingTask.Name}"/>
         </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Status"/>
+            <Picker x:Name="statusPicker"
+                    Title="{Binding MovingTask.Status}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Open</x:String>
+                        <x:String>InProgress</x:String>
+                        <x:String>Complete</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+
+                <Picker.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="SelectedIndexChanged"
+                        Command="{Binding PickerSelectedItemChangedCommand}"
+                        CommandParameter="{Binding Source={x:Reference statusPicker}, Path=SelectedIndex}"
+                        />
+
+                </Picker.Behaviors>
+            </Picker>
+        </HorizontalStackLayout>
+        <Button Text="Save" Command="{Binding SaveMovingTaskCommand}"/>
+        <Button Text="Cancel" Command="{Binding CancelCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

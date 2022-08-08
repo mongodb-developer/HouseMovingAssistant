@@ -1,11 +1,7 @@
-﻿using System;
-using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Realms.Sync;
+using System.Windows.Input;
 
 namespace HouseMovingAssistant.ViewModels
 {

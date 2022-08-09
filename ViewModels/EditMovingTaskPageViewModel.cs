@@ -33,9 +33,7 @@ namespace HouseMovingAssistant.ViewModels
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = await Realm.GetInstanceAsync(config);
-
-            
-
+        
             try
             {
                 realm.Write(() =>

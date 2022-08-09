@@ -25,7 +25,6 @@ namespace HouseMovingAssistant.ViewModels
             movingTasks = new ObservableCollection<MovingTask>();
         }
 
-
         [ObservableProperty]
         string welcomeMessage;
 
@@ -35,7 +34,6 @@ namespace HouseMovingAssistant.ViewModels
         [ObservableProperty]
         ObservableCollection<MovingTask> movingTasks;
        
-
         public async Task InitialiseRealm()
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
@@ -71,13 +69,38 @@ namespace HouseMovingAssistant.ViewModels
         }
 
         [RelayCommand]
-        async Task EditTask(MovingTask task)
+        async Task AddMovingTask()
         {
 
-            await Shell.Current.GoToAsync($"{nameof(EditTaskPage)}", new Dictionary<string, object>
+            if (string.IsNullOrWhiteSpace(MovingTaskEntryText))
+                return;
+
+            try
             {
-                ["MovingTask"] = task
-            }) ;
+                var task =
+                    new MovingTask
+                    {
+                        Name = MovingTaskEntryText,
+                        Partition = App.RealmApp.CurrentUser.Id,
+                        Status = "Open",
+                        Owner = App.RealmApp.CurrentUser.Profile.Email
+                    };
+
+                MovingTasks.Add(task);
+
+                realm.Write(() =>
+                {
+                    realm.Add(task);
+                });
+
+                MovingTaskEntryText = "";
+
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+
+            }
         }
 
         [RelayCommand]
@@ -91,47 +114,23 @@ namespace HouseMovingAssistant.ViewModels
                 });
 
                 MovingTasks.Remove(task);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
         }
 
         [RelayCommand]
-       async Task AddMovingTask()
+        async Task EditTask(MovingTask task)
         {
 
-            if (string.IsNullOrWhiteSpace(MovingTaskEntryText))
-                return;
-
-                try
-                {
-                    var task =
-                        new MovingTask
-                        {
-                            Name = MovingTaskEntryText,
-                            Partition = App.RealmApp.CurrentUser.Id,
-                            Status = "Open",
-                            Owner = App.RealmApp.CurrentUser.Profile.Email
-                        };
-
-                MovingTasks.Add(task);
-
-                    realm.Write(() =>
-                    {
-                        realm.Add(task);
-                    });
-
-                    MovingTaskEntryText = "";
-
-                } catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-
-                }
+            await Shell.Current.GoToAsync($"{nameof(EditTaskPage)}", new Dictionary<string, object>
+            {
+                ["MovingTask"] = task
+            }) ;
         }
-
-
+      
         [RelayCommand]
         async Task ViewStats()
         {

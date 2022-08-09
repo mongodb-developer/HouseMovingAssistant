@@ -14,7 +14,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("edittaskpage", typeof(EditTaskPage));
 	}
 
-    protected override void OnNavigated(ShellNavigatedEventArgs args)
+	protected override void OnNavigated(ShellNavigatedEventArgs args)
     {
         base.OnNavigated(args);
 

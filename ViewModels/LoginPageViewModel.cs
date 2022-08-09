@@ -7,12 +7,11 @@ namespace HouseMovingAssistant.ViewModels
 {
 
     public partial class LoginPageViewModel : ObservableObject
-	{
+    {
 
         public LoginPageViewModel()
-		{
-          
-		}
+        {
+        }
 
         [ObservableProperty]
         private string emailText = "";
@@ -21,36 +20,10 @@ namespace HouseMovingAssistant.ViewModels
         private string passwordText = "";
 
         [RelayCommand]
-		public async Task Login()
+        public async Task CreateAccount()
         {
-			try
-            {
-                var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(EmailText, PasswordText));
-
-                if(user != null)
-                {
-                    await AppShell.Current.GoToAsync("///Main");
-                    EmailText = "";
-                    PasswordText = "";                    
-                }
-                else
-                {
-                    throw new Exception();
-                }   
-
-            } catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Error Logging In", ex.Message, "OK");
-            }
-
-        }
-
-        [RelayCommand]
-		public async Task CreateAccount()
-		{
             try
             {
-
                 await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(EmailText, PasswordText);
 
                 await Login();
@@ -62,8 +35,34 @@ namespace HouseMovingAssistant.ViewModels
             }
         }
 
-		public bool CheckIsLoggedIn()
-        {   
+        [RelayCommand]
+        public async Task Login()
+        {
+            try
+            {
+                var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(EmailText, PasswordText));
+
+                if (user != null)
+                {
+                    await AppShell.Current.GoToAsync("///Main");
+                    EmailText = "";
+                    PasswordText = "";
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error Logging In", ex.Message, "OK");
+            }
+
+        }
+
+        public bool CheckIsLoggedIn()
+        {
             if (App.RealmApp.CurrentUser != null)
             {
                 var user = App.RealmApp.CurrentUser;
@@ -74,6 +73,6 @@ namespace HouseMovingAssistant.ViewModels
 
             return false;
         }
-	}
+    }
 }
 

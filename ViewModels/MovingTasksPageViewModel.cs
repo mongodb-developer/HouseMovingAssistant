@@ -19,8 +19,6 @@ namespace HouseMovingAssistant.ViewModels
         private Realm realm;
         private PartitionSyncConfiguration config;
 
-       
-
         public MovingTasksPageViewModel()
         {
             WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";

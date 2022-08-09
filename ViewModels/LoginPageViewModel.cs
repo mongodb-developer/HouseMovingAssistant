@@ -1,42 +1,26 @@
-﻿using MvvmHelpers;
-using MvvmHelpers.Commands;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Realms.Sync;
 using System.Windows.Input;
 
 namespace HouseMovingAssistant.ViewModels
 {
 
-    public class LoginPageViewModel : BaseViewModel
+    public partial class LoginPageViewModel : ObservableObject
 	{
-
-        public ICommand LoginCommand {get; set;}
-        public ICommand CreateAccountCommand {get; set;}
 
         public LoginPageViewModel()
 		{
-            LoginCommand = new AsyncCommand(Login);
-            CreateAccountCommand = new AsyncCommand(CreateAccount);
+          
 		}
 
-
+        [ObservableProperty]
         private string emailText = "";
-        public string EmailText
-        {
-            get => emailText;
-            set => SetProperty(ref emailText, value);
-        }
 
-
+        [ObservableProperty]
         private string passwordText = "";
-        public string PasswordText
-        {
-            get => passwordText;
-            set => SetProperty(ref passwordText, value);
-        }
 
-
-
-       
+        [RelayCommand]
 		public async Task Login()
         {
 			try
@@ -61,7 +45,7 @@ namespace HouseMovingAssistant.ViewModels
 
         }
 
-       
+        [RelayCommand]
 		public async Task CreateAccount()
 		{
             try

@@ -29,6 +29,26 @@ namespace HouseMovingAssistant.ViewModels
         int index;
 
         [RelayCommand]
+        void PickerSelectedItemChanged(int selectedItemIndex)
+        {
+            newName = MovingTask.Name;
+            newStatus = MovingTask.Status;
+
+            switch (selectedItemIndex)
+            {
+                case 0:
+                    newStatus = MovingTask.TaskStatus.Open.ToString();
+                    break;
+                case 1:
+                    newStatus = MovingTask.TaskStatus.InProgress.ToString();
+                    break;
+                case 2:
+                    newStatus = MovingTask.TaskStatus.Complete.ToString();
+                    break;
+            }
+        }
+
+        [RelayCommand]
         async Task SaveMovingTask()
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
@@ -52,26 +72,6 @@ namespace HouseMovingAssistant.ViewModels
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
 
-        }
-
-        [RelayCommand]
-         void PickerSelectedItemChanged(int selectedItemIndex)
-        {
-            newName = MovingTask.Name;
-            newStatus = MovingTask.Status;
-
-            switch(selectedItemIndex)
-            {
-                case 0:
-                    newStatus = MovingTask.TaskStatus.Open.ToString();
-                    break;
-                case 1:
-                    newStatus = MovingTask.TaskStatus.InProgress.ToString();
-                    break;
-                case 2:
-                    newStatus = MovingTask.TaskStatus.Complete.ToString();
-                    break;
-            }
         }
 
         [RelayCommand]

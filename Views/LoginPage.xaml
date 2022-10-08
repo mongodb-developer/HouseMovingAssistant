@@ -8,14 +8,13 @@
              Title="LoginPage">
 
     <Grid x:Name="MainGrid">
-        <Image Aspect="Fill" Source="entrance.jpg" />
-       
-            <VerticalStackLayout VerticalOptions="FillAndExpand" Padding="6" Spacing="10" HorizontalOptions="CenterAndExpand">
-                <VerticalStackLayout VerticalOptions="CenterAndExpand" Spacing="30">
+
+        <VerticalStackLayout VerticalOptions="FillAndExpand" Padding="6" Spacing="10" HorizontalOptions="CenterAndExpand">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand" Spacing="30">
                 <Image Source="moving_truck.png" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100"/>
-                
+
                 <!-- Place new controls here -->
-                <VerticalStackLayout x:Name="FormLayout" Spacing="5" VerticalOptions="CenterAndExpand">                    
+                <VerticalStackLayout x:Name="FormLayout" Spacing="5" VerticalOptions="CenterAndExpand">
                     <VerticalStackLayout Spacing="8">
                         <Label Text="Username/Email" TextColor="{StaticResource Primary}" FontSize="20" FontAttributes="Bold"/>
                         <Entry Text="{Binding EmailText}" 
@@ -25,24 +24,24 @@
                     <VerticalStackLayout Spacing="8">
                         <Label Text="Password" TextColor="{StaticResource Primary}" FontSize="20" FontAttributes="Bold"/>
                         <Entry Text="{Binding PasswordText}"  BackgroundColor="{StaticResource Tertiary}" IsPassword="True"/>
-                    </VerticalStackLayout>                    
-                </VerticalStackLayout>
                     </VerticalStackLayout>
-                <Button x:Name="LoginButton" 
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            <Button x:Name="LoginButton" 
                         Command="{Binding LoginCommand}"
                         VerticalOptions="EndAndExpand" 
                         Text="Login"
                         BackgroundColor="{StaticResource Secondary}" 
                         TextColor="{StaticResource Primary}"/>
-                <Button x:Name="CreateAccountButton" 
+            <Button x:Name="CreateAccountButton" 
                         Command="{Binding CreateAccountCommand}" 
                         VerticalOptions="EndAndExpand" 
                         Text="Create Account" 
                         BackgroundColor="{StaticResource Primary}" 
                         TextColor="{StaticResource Secondary}"/>
-            </VerticalStackLayout>
-      
+        </VerticalStackLayout>
+
 
     </Grid>
-   
+
 </ContentPage>

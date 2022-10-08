@@ -21,8 +21,8 @@ namespace HouseMovingAssistant.ViewModels
 
         public MovingTasksPageViewModel()
         {
-            WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";
-            movingTasks = new ObservableCollection<MovingTask>();
+            WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";           
+          
         }
 
         [ObservableProperty]
@@ -32,7 +32,7 @@ namespace HouseMovingAssistant.ViewModels
         string movingTaskEntryText;
 
         [ObservableProperty]
-        ObservableCollection<MovingTask> movingTasks;
+        IEnumerable<MovingTask> movingTasks;
        
         public async Task InitialiseRealm()
         {
@@ -63,7 +63,9 @@ namespace HouseMovingAssistant.ViewModels
 
             if(user != null)
             {
-                MovingTasks = new ObservableCollection<MovingTask>(realm.All<MovingTask>().ToList().Reverse<MovingTask>());
+
+                MovingTasks = realm.All<MovingTask>();
+                MovingTasks.Reverse();
             }
             
         }
@@ -84,9 +86,7 @@ namespace HouseMovingAssistant.ViewModels
                         Partition = App.RealmApp.CurrentUser.Id,
                         Status = "Open",
                         Owner = App.RealmApp.CurrentUser.Profile.Email
-                    };
-
-                MovingTasks.Add(task);
+                    };                
 
                 realm.Write(() =>
                 {
@@ -113,7 +113,7 @@ namespace HouseMovingAssistant.ViewModels
                     realm.Remove(task);
                 });
 
-                MovingTasks.Remove(task);
+              
             }
             catch (Exception ex)
             {

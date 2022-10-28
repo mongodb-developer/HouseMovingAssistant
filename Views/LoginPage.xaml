@@ -11,7 +11,7 @@
 
         <VerticalStackLayout VerticalOptions="FillAndExpand" Padding="6" Spacing="10" HorizontalOptions="CenterAndExpand">
             <VerticalStackLayout VerticalOptions="CenterAndExpand" Spacing="30">
-                <Image Source="moving_truck.png" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100"/>
+                <Image Source="moving_truck_transparent.png" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100"/>
 
                 <!-- Place new controls here -->
                 <VerticalStackLayout x:Name="FormLayout" Spacing="5" VerticalOptions="CenterAndExpand">

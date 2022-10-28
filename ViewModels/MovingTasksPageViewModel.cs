@@ -31,8 +31,26 @@ namespace HouseMovingAssistant.ViewModels
         [ObservableProperty]
         string movingTaskEntryText;
 
+        // Is this needed to be an observable property?
         [ObservableProperty]
         IEnumerable<MovingTask> movingTasks;
+
+        [ObservableProperty]
+        bool buttonEnabled;
+
+        private void EntryListener()
+        {
+            if(MovingTaskEntryText.Length < 1)
+            {
+                ButtonEnabled = false;
+                
+            }
+            else
+            {
+                ButtonEnabled = true;
+            }
+
+        }
        
         public async Task InitialiseRealm()
         {
@@ -41,31 +59,29 @@ namespace HouseMovingAssistant.ViewModels
             Console.WriteLine(realm.All<User>());
             user = realm.Find<User>(App.RealmApp.CurrentUser.Id);
 
-            if(user == null)
-            {
-                await Task.Delay(5000);
-                user = realm.Find<User>(App.RealmApp.CurrentUser.Id);
+            //if(user == null)
+            //{
+            //    await Task.Delay(5000);
+            //    user = realm.Find<User>(App.RealmApp.CurrentUser.Id);
 
-                if(user == null)
-                {
-                    Console.WriteLine("NO USER OBJECT: This error occurs if " +
-                           "you do not have the trigger configured on the backend " +
-                           "or when there is a network connectivity issue. See " +
-                           "https://docs.mongodb.com/realm/tutorial/realm-app/#triggers");
+            //    if(user == null)
+            //    {
+            //        Console.WriteLine("NO USER OBJECT: This error occurs if " +
+            //               "you do not have the trigger configured on the backend " +
+            //               "or when there is a network connectivity issue. See " +
+            //               "https://docs.mongodb.com/realm/tutorial/realm-app/#triggers");
 
-                    await App.Current.MainPage.DisplayAlert("No User object",
-                        "The User object for this user was not found on the server. " +
-                        "If this is a new user acocunt, the backend trigger may not have completed, " +
-                        "or the tirgger doesn't exist. Check your backend set up and logs.", "OK");
-                }
-
-            }
+            //        await App.Current.MainPage.DisplayAlert("No User object",
+            //            "The User object for this user was not found on the server. " +
+            //            "If this is a new user acocunt, the backend trigger may not have completed, " +
+            //            "or the tirgger doesn't exist. Check your backend set up and logs.", "OK");
+            //    }
+            //}
 
             if(user != null)
             {
-
-                MovingTasks = realm.All<MovingTask>();
-                MovingTasks.Reverse();
+                // We want the most recent first/last(?)
+                MovingTasks = realm.All<MovingTask>().OrderBy(task => task.CreatedAt);                
             }
             
         }
@@ -85,7 +101,8 @@ namespace HouseMovingAssistant.ViewModels
                         Name = MovingTaskEntryText,
                         Partition = App.RealmApp.CurrentUser.Id,
                         Status = "Open",
-                        Owner = App.RealmApp.CurrentUser.Profile.Email
+                        Owner = App.RealmApp.CurrentUser.Profile.Email,
+                        CreatedAt = DateTimeOffset.UtcNow
                     };                
 
                 realm.Write(() =>

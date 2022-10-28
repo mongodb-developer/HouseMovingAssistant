@@ -17,6 +17,10 @@ namespace HouseMovingAssistant.Models
         [MapTo("name")]
         [Required]
         public string Name { get; set; }
+
+        [MapTo("email")]
+        [Required]
+        public string Email { get; set; }
     }
 }
 

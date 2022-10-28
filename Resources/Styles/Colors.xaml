@@ -4,9 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Primary">#323E48</Color>
-    <Color x:Key="Secondary">#F9A01B</Color>
-    <Color x:Key="Tertiary">#FFD54C</Color>
+    <Color x:Key="Primary">#FFA03A</Color>
+    <Color x:Key="Secondary">#393C49</Color>
+    <Color x:Key="Tertiary">#42EA7C69</Color>
+    <Color x:Key="Neutral">#969696</Color>
+    <Color x:Key="NeutralLighter">#E5E5E1</Color>
+    <Color x:Key="NeutralDarker">#505050</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
@@ -17,9 +20,34 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+    <Color x:Key="Accent">#F7B548</Color>
+    <Color x:Key="Error">#C00</Color>
+    <Color x:Key="Warning">#FFCC00</Color>
+    <Color x:Key="Text_Light">#000000</Color>
+    <Color x:Key="Text_Dark">#FFFFFF</Color>
+    <Color x:Key="TextOnSolid_Light">#FFFFFF</Color>
+    <Color x:Key="TextOnSolid_Dark">#000000</Color>
+    <Color x:Key="TextSecondary_Light">#1d1d1d</Color>
+    <Color x:Key="TextSecondary_Dark">#f1f1f1</Color>
+    <Color x:Key="DarkBg1">#252836</Color>
+    <Color x:Key="DarkBg2">#1F1D2B</Color>
+    <Color x:Key="DarkBg1Transparent">#E6252836</Color>
+    <Color x:Key="TextSecondary">#ABBBC2</Color>
+    <Color x:Key="Yellow100Accent">#F7B548</Color>
+    <Color x:Key="Yellow200Accent">#FFD590</Color>
+    <Color x:Key="Yellow300Accent">#FFE5B9</Color>
+    <Color x:Key="Cyan100Accent">#28C2D1</Color>
+    <Color x:Key="Cyan200Accent">#7BDDEF</Color>
+    <Color x:Key="Cyan300Accent">#C3F2F4</Color>
+    <Color x:Key="Blue100Accent">#3E8EED</Color>
+    <Color x:Key="Blue200Accent">#72ACF1</Color>
+    <Color x:Key="Blue300Accent">#A7CBF6</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="DarkBg1Brush" Color="{StaticResource DarkBg1}"/>
+    <SolidColorBrush x:Key="DarkBg2Brush" Color="{StaticResource DarkBg2}"/>
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
@@ -31,14 +59,6 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-    <Color x:Key="Yellow100Accent">#F7B548</Color>
-    <Color x:Key="Yellow200Accent">#FFD590</Color>
-    <Color x:Key="Yellow300Accent">#FFE5B9</Color>
-    <Color x:Key="Cyan100Accent">#28C2D1</Color>
-    <Color x:Key="Cyan200Accent">#7BDDEF</Color>
-    <Color x:Key="Cyan300Accent">#C3F2F4</Color>
-    <Color x:Key="Blue100Accent">#3E8EED</Color>
-    <Color x:Key="Blue200Accent">#72ACF1</Color>
-    <Color x:Key="Blue300Accent">#A7CBF6</Color>
+  
 
 </ResourceDictionary>

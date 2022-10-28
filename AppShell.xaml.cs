@@ -1,5 +1,6 @@
 ﻿using HouseMovingAssistant.ViewModels;
 using HouseMovingAssistant.Views;
+using Realms.Sync;
 
 namespace HouseMovingAssistant;
 
@@ -18,11 +19,12 @@ public partial class AppShell : Shell
     {
         base.OnNavigated(args);
 
-		var isLoggedIn = viewModel.CheckIsLoggedIn();
-
-		if(isLoggedIn)
+        if (App.RealmApp.CurrentUser != null)
         {
-			AppShell.Current.GoToAsync("/Main");
-        }
+            var user = App.RealmApp.CurrentUser;
+
+            if (user.State == UserState.LoggedIn)
+                AppShell.Current.GoToAsync("/Main");
+        }        
     }
 }

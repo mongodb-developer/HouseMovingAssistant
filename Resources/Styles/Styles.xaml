@@ -4,6 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style x:Key="BaseStyle"
+           TargetType="Element">
+        <Setter Property="Shell.BackgroundColor"
+                Value="{StaticResource DarkBg2}" />
+        <Setter Property="Shell.ForegroundColor"
+                Value="{StaticResource Text_Dark}" />
+        <Setter Property="Shell.TitleColor"
+                Value="{StaticResource Text_Dark}" />
+        <Setter Property="Shell.DisabledColor"
+                Value="Green" />
+        <Setter Property="Shell.UnselectedColor"
+                Value="#CC0000" />
+        <Setter Property="Shell.NavBarHasShadow"
+                Value="False"/>
+    </Style>
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
@@ -352,7 +368,11 @@
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="Background"
+            Value="{AppThemeBinding
+                Dark={StaticResource DarkBg1Brush},
+                Light={StaticResource WhiteBrush}}"/>
+        <Setter Property="Shell.NavBarIsVisible" Value="True"/>
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">

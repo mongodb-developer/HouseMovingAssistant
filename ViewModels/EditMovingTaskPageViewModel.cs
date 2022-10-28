@@ -31,6 +31,8 @@ namespace HouseMovingAssistant.ViewModels
         [RelayCommand]
         void PickerSelectedItemChanged(int selectedItemIndex)
         {
+
+            // Status should be in a write transaction
             newName = MovingTask.Name;
             newStatus = MovingTask.Status;
 

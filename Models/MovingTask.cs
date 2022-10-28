@@ -25,6 +25,9 @@ namespace HouseMovingAssistant.Models
         [Required]
         public string Status { get; set; }
 
+        [MapTo("createdAt")]        
+        public DateTimeOffset CreatedAt { get; set; }
+
         public enum TaskStatus
         {
             Open,

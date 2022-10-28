@@ -15,7 +15,7 @@ public partial class MovingTasksPage : ContentPage
 	protected override async void OnAppearing()
 	{
 		await viewModel.InitialiseRealm();
-		
+
 	}
 }
 

@@ -5,7 +5,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="vm:EditMovingTaskPageViewModel"
              x:Class="HouseMovingAssistant.Views.EditTaskPage"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="True">
     <VerticalStackLayout VerticalOptions="CenterAndExpand"
                          HorizontalOptions="CenterAndExpand"
                          Spacing="5">
@@ -37,8 +37,6 @@
 
                 </Picker.Behaviors>
             </Picker>
-        </HorizontalStackLayout>
-        <Button Text="Save" Command="{Binding SaveMovingTaskCommand}"/>
-        <Button Text="Cancel" Command="{Binding CancelCommand}"/>
+        </HorizontalStackLayout>       
     </VerticalStackLayout>
 </ContentPage>

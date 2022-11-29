@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.NavBarIsVisible="False"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:HouseMovingAssistant.ViewModels"
              xmlns:models="clr-namespace:HouseMovingAssistant.Models"
             x:DataType="vm:MovingTasksPageViewModel"
@@ -40,7 +41,7 @@
 
 
             <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
-                <Entry Placeholder="Enter moving task.." Text="{Binding MovingTaskEntryText}"/>
+                <Entry Placeholder="Enter moving task.." Text="{Binding MovingTaskEntryText}" />
                 <Button Text="Add Task" 
                         Command="{Binding AddMovingTaskCommand}"
                        IsEnabled="{Binding ButtonEnabled}"/>

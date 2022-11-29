@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HouseMovingAssistant.Models;
+using HouseMovingAssistant.Services;
 using Realms;
 using Realms.Sync;
 
@@ -10,17 +11,9 @@ namespace HouseMovingAssistant.ViewModels
     public partial class EditMovingTaskPageViewModel : ObservableObject
     {
         private string newName;
-        private string newStatus;
-        public EditMovingTaskPageViewModel()
-        {
-        }
+        private string newStatus;      
 
-        private Realm realm;
-        private PartitionSyncConfiguration config;
-
-        public string NewStatus { get; set; }
-
-        public string NewName { get; set; }
+        private Realm realm; 
 
         [ObservableProperty]
         MovingTask movingTask;
@@ -29,58 +22,41 @@ namespace HouseMovingAssistant.ViewModels
         int index;
 
         [RelayCommand]
-        void PickerSelectedItemChanged(int selectedItemIndex)
-        {
-
-            // Status should be in a write transaction
+        async Task PickerSelectedItemChanged(int selectedItemIndex)
+        {           
             newName = MovingTask.Name;
             newStatus = MovingTask.Status;
 
-            switch (selectedItemIndex)
-            {
-                case 0:
-                    newStatus = MovingTask.TaskStatus.Open.ToString();
-                    break;
-                case 1:
-                    newStatus = MovingTask.TaskStatus.InProgress.ToString();
-                    break;
-                case 2:
-                    newStatus = MovingTask.TaskStatus.Complete.ToString();
-                    break;
-            }
-        }
+            realm = RealmDatabaseService.GetRealm();
 
-        [RelayCommand]
-        async Task SaveMovingTask()
-        {
-            config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
-            realm = await Realm.GetInstanceAsync(config);
-        
             try
             {
+                var task = realm.Find<MovingTask>(MovingTask.Id);
+
                 realm.Write(() =>
                 {
-                    var task = realm.Find<MovingTask>(MovingTask.Id);
+                    switch (selectedItemIndex)
+                    {
+                        case 0:
 
-                    task.Name = newName;
-                    task.Status = newStatus;
-
+                            task.Status = MovingTask.TaskStatus.Open.ToString();
+                            break;
+                        case 1:
+                            task.Status = MovingTask.TaskStatus.InProgress.ToString();
+                            break;
+                        case 2:
+                            task.Status = MovingTask.TaskStatus.Complete.ToString();
+                            break;
+                    }
                 });
-
-                await Shell.Current.GoToAsync("..");
+               
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
 
+            
         }
-
-        [RelayCommand]
-        async Task Cancel()
-        {
-            await Shell.Current.GoToAsync("..");
-        }
-
     }
 }

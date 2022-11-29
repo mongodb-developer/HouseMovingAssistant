@@ -12,11 +12,11 @@ public partial class MovingTasksPage : ContentPage
 		BindingContext = viewModel;
 	}
 
-	protected override async void OnAppearing()
-	{
-		await viewModel.InitialiseRealm();
-
-	}
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        viewModel.InitialiseRealm();
+    }
 }
 
 

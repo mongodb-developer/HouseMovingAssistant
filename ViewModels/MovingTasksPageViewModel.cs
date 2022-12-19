@@ -7,7 +7,7 @@ using Realms;
 using Realms.Sync;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
+using static System.Net.Mime.MediaTypeNames;  //TODO Is this used?
 using User = HouseMovingAssistant.Models.User;
 
 namespace HouseMovingAssistant.ViewModels
@@ -20,10 +20,10 @@ namespace HouseMovingAssistant.ViewModels
         private Realm realm;
         private PartitionSyncConfiguration config;
 
+        //TODO Personally I would put the constructor after all the fields and properties deifnition
         public MovingTasksPageViewModel()
         {
             WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";           
-          
         }
 
         [ObservableProperty]
@@ -32,6 +32,9 @@ namespace HouseMovingAssistant.ViewModels
         [ObservableProperty]
         string movingTaskEntryText;
 
+        //TODO It's needed if initialized after the constructor (and so it needs to raise "OnPropertyChanged")
+        //In general I think it's a good idea to have it, it doesn't hurt
+
         // Is this needed to be an observable property?
         [ObservableProperty]
         IEnumerable<MovingTask> movingTasks;
@@ -39,7 +42,7 @@ namespace HouseMovingAssistant.ViewModels
         [ObservableProperty]
         bool buttonEnabled;
 
-        
+        //TODO A question ... I can see that you leave empty lines in various parts of the code. Is this done for a particular reason?
        
         public void InitialiseRealm()
         {
@@ -84,7 +87,6 @@ namespace HouseMovingAssistant.ViewModels
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-
             }
         }
 

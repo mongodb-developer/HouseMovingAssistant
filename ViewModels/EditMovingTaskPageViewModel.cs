@@ -27,6 +27,8 @@ namespace HouseMovingAssistant.ViewModels
             newName = MovingTask.Name;
             newStatus = MovingTask.Status;
 
+            //TODO I think it would make sense to create the realm in the viewmodel constructor (or on another lifetcycle method)
+            //If you prefer not to do it, it will be better to dispose of the realm at the end of the method (preferably with using)
             realm = RealmDatabaseService.GetRealm();
 
             try

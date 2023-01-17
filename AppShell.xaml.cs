@@ -6,13 +6,10 @@ namespace HouseMovingAssistant;
 
 public partial class AppShell : Shell
 {
-	LoginPageViewModel viewModel;
+	
 	public AppShell()
 	{
-		InitializeComponent();
-		viewModel = new LoginPageViewModel();
-
-		Routing.RegisterRoute("edittaskpage", typeof(EditTaskPage));
+		InitializeComponent();		
 	}
 
 	protected override void OnNavigated(ShellNavigatedEventArgs args)
@@ -24,7 +21,7 @@ public partial class AppShell : Shell
             var user = App.RealmApp.CurrentUser;
 
             if (user.State == UserState.LoggedIn)
-                AppShell.Current.GoToAsync("/Main");
+                AppShell.Current.GoToAsync("///Main");
         }        
     }
 }

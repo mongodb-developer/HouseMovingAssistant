@@ -5,9 +5,6 @@ using HouseMovingAssistant.Services;
 using HouseMovingAssistant.Views;
 using Realms;
 using Realms.Sync;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 using User = HouseMovingAssistant.Models.User;
 
 namespace HouseMovingAssistant.ViewModels
@@ -22,8 +19,8 @@ namespace HouseMovingAssistant.ViewModels
 
         public MovingTasksPageViewModel()
         {
-            WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";           
-          
+            WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";
+            ButtonEnabled = true;
         }
 
         [ObservableProperty]
@@ -31,8 +28,7 @@ namespace HouseMovingAssistant.ViewModels
 
         [ObservableProperty]
         string movingTaskEntryText;
-
-        // Is this needed to be an observable property?
+       
         [ObservableProperty]
         IEnumerable<MovingTask> movingTasks;
 
@@ -43,8 +39,7 @@ namespace HouseMovingAssistant.ViewModels
        
         public void InitialiseRealm()
         {
-            realm = RealmDatabaseService.GetRealm();
-            Console.WriteLine(realm.All<User>());
+            realm = RealmDatabaseService.GetRealm(); 
             user = realm.Find<User>(App.RealmApp.CurrentUser.Id);
 
             if(user != null)
@@ -59,19 +54,22 @@ namespace HouseMovingAssistant.ViewModels
         {
 
             if (string.IsNullOrWhiteSpace(MovingTaskEntryText))
-                return;
+                return;            
 
             try
             {
+                ButtonEnabled = false;
                 var task =
                     new MovingTask
                     {
                         Name = MovingTaskEntryText,
                         Partition = App.RealmApp.CurrentUser.Id,
-                        Status = "Open",
+                        Status = MovingTask.TaskStatus.Open.ToString(),
                         Owner = App.RealmApp.CurrentUser.Profile.Email,
                         CreatedAt = DateTimeOffset.UtcNow
-                    };                
+                    };
+
+                MovingTasks.Append(task);
 
                 realm.Write(() =>
                 {
@@ -79,12 +77,13 @@ namespace HouseMovingAssistant.ViewModels
                 });
 
                 MovingTaskEntryText = "";
-
+                ButtonEnabled = true;
+               
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-
+                ButtonEnabled = true;
             }
         }
 

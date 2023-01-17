@@ -3,7 +3,7 @@ using Realms;
 
 namespace HouseMovingAssistant.Models
 {
-	public class User : RealmObject
+	public partial class User : IRealmObject
 	{
         [PrimaryKey]
         [MapTo("_id")]

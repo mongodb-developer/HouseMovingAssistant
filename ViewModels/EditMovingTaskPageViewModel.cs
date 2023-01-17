@@ -9,10 +9,7 @@ namespace HouseMovingAssistant.ViewModels
 {
     [QueryProperty(nameof(MovingTask), nameof(MovingTask))]
     public partial class EditMovingTaskPageViewModel : ObservableObject
-    {
-        private string newName;
-        private string newStatus;      
-
+    {   
         private Realm realm; 
 
         [ObservableProperty]
@@ -23,10 +20,7 @@ namespace HouseMovingAssistant.ViewModels
 
         [RelayCommand]
         async Task PickerSelectedItemChanged(int selectedItemIndex)
-        {           
-            newName = MovingTask.Name;
-            newStatus = MovingTask.Status;
-
+        {          
             realm = RealmDatabaseService.GetRealm();
 
             try
@@ -38,7 +32,6 @@ namespace HouseMovingAssistant.ViewModels
                     switch (selectedItemIndex)
                     {
                         case 0:
-
                             task.Status = MovingTask.TaskStatus.Open.ToString();
                             break;
                         case 1:
@@ -48,15 +41,12 @@ namespace HouseMovingAssistant.ViewModels
                             task.Status = MovingTask.TaskStatus.Complete.ToString();
                             break;
                     }
-                });
-               
+                });               
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-            }
-
-            
+            }            
         }
     }
 }

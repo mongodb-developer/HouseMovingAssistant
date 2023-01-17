@@ -13,6 +13,7 @@ public partial class App : Application
 		Routing.RegisterRoute(nameof(TaskStatsPage), typeof(TaskStatsPage));
 		Routing.RegisterRoute(nameof(EditTaskPage), typeof(EditTaskPage));
 
+
         RealmApp = Realms.Sync.App.Create(AppConfig.RealmAppId);
         MainPage = new AppShell();
 	}

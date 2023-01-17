@@ -18,6 +18,3 @@ public partial class MovingTasksPage : ContentPage
         viewModel.InitialiseRealm();
     }
 }
-
-
-

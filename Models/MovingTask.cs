@@ -4,7 +4,7 @@ using Realms;
 
 namespace HouseMovingAssistant.Models
 {
-    public class MovingTask : RealmObject
+    public partial class MovingTask : IRealmObject
     {
         [PrimaryKey]
         [MapTo("_id")]

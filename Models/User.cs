@@ -6,20 +6,22 @@ namespace HouseMovingAssistant.Models
 	public partial class User : IRealmObject
 	{
         [PrimaryKey]
-        [MapTo("_id")]
+       
         [Required]
+        [MapTo("_id")]
         public string Id { get; set; }
 
-        [MapTo("_partition")]
+       
         [Required]
+        [MapTo("_partition")]
         public string Partition { get; set; }
 
+        
+        [Required]
         [MapTo("name")]
-        [Required]
-        public string Name { get; set; }
-
+        public string Name { get; set; }       
+        
         [MapTo("email")]
-        [Required]
         public string Email { get; set; }
     }
 }

@@ -4,8 +4,7 @@ using HouseMovingAssistant.ViewModels;
 namespace HouseMovingAssistant.Views;
 
 public partial class EditTaskPage : ContentPage
-{
-	
+{	
 	public EditTaskPage(EditMovingTaskPageViewModel viewModel)
 	{
 		InitializeComponent();			

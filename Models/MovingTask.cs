@@ -17,10 +17,14 @@ namespace HouseMovingAssistant.Models
         [Required]
         public string Name { get; set; }
 
+        //TODO I think it would make sense to always have MapTo as the attribute "closest" to the property definition, so it's slightly easier to read 
         [MapTo("_partition")]
         [Required]
         public string Partition { get; set; }
 
+        //TODO You could consider creating making this private and creating another public variable of type TaskStatus and then convert between them
+        //like it's suggested in https://www.mongodb.com/developer/products/realm/advanced-modeling-realm-dotnet/ (Using Unpersistable Data Types)
+        //Also a matter of preference, but it helps to avoid writing wrong status strings for instance
         [MapTo("status")]
         [Required]
         public string Status { get; set; }

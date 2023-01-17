@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace HouseMovingAssistant.ViewModels
 {
+    //TODO Is this used?
     public partial class CreateNewUserPageViewModel : ObservableObject
     {
         [ObservableProperty]

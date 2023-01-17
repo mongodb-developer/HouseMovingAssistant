@@ -11,7 +11,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();		
 	}
-
+    
 	protected override void OnNavigated(ShellNavigatedEventArgs args)
     {
         base.OnNavigated(args);

@@ -17,6 +17,7 @@ namespace HouseMovingAssistant.ViewModels
         private Realm realm;
         private PartitionSyncConfiguration config;
 
+        //TODO Personally I would put the constructor after all the fields and properties deifnition
         public MovingTasksPageViewModel()
         {
             WelcomeMessage = $"Welcome in {App.RealmApp.CurrentUser.Profile.Email}!";
@@ -34,8 +35,6 @@ namespace HouseMovingAssistant.ViewModels
 
         [ObservableProperty]
         bool buttonEnabled;
-
-        
        
         public void InitialiseRealm()
         {

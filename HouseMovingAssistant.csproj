@@ -62,9 +62,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-	  <PackageReference Include="Realm" Version="10.19.0" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	  <PackageReference Include="Realm" Version="11.6.0" />
 	  <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 	</ItemGroup>
 
@@ -85,6 +85,9 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\StatsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TaskStatsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>

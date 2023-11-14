@@ -1,7 +1,7 @@
 ﻿using HouseMovingAssistant.ViewModels;
 using HouseMovingAssistant.Views;
+using CommunityToolkit.Mvvm;
 using CommunityToolkit.Maui;
-
 
 namespace HouseMovingAssistant;
 
@@ -11,7 +11,7 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 		builder
-			.UseMauiApp<App>()
+			.UseMauiApp<App>()			
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{

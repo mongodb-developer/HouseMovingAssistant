@@ -5,7 +5,7 @@
              Title="Stats"
              >
 
-    <WebView>
+    <!--<WebView>
         <WebView.Source>
             <HtmlWebViewSource>
                 <HtmlWebViewSource.Html>
@@ -22,5 +22,5 @@
                 </HtmlWebViewSource.Html>
             </HtmlWebViewSource>
         </WebView.Source>
-    </WebView>
+    </WebView>-->
 </ContentPage>

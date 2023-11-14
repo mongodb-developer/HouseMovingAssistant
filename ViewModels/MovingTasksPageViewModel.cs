@@ -114,7 +114,14 @@ namespace HouseMovingAssistant.ViewModels
         [RelayCommand]
         async Task ViewStats()
         {
-            await Shell.Current.GoToAsync("TaskStatsPage");
-        }        
+            //await Shell.Current.GoToAsync($"{nameof(TaskStatsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(StatsPage)}");
+        }
+
+        [RelayCommand]
+        async Task Logout()
+        {
+            await Shell.Current.GoToAsync("/Login");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using HouseMovingAssistant.ViewModels;
+using HouseMovingAssistant.ViewModels;
 using HouseMovingAssistant.Views;
 using Realms.Sync;
 
@@ -9,8 +9,10 @@ public partial class AppShell : Shell
 	
 	public AppShell()
 	{
-		InitializeComponent();		
-	}
+		InitializeComponent();
+        Routing.RegisterRoute("edittaskpage", typeof(EditTaskPage));
+        Routing.RegisterRoute("statspage", typeof(StatsPage));
+    }
     
 	protected override void OnNavigated(ShellNavigatedEventArgs args)
     {
